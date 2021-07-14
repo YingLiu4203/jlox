@@ -56,3 +56,9 @@ abstract class Expr {
 ```
 
 It is tedious to handwrite each class definition, field declaration, constructor, and initializer. We write code to generate the classes.
+
+## The Expression Problem and The Visitor Pattern
+
+To use the syntax tree, you can check the class types (or better using polymorphic dispatch) and process them in a function -- a functional style. It is easy to add new funcitons to work with the classes but adding a new type requires changes to all functions. Using an interfact with a set of predefined methods makes it easy to add new classes -- an OO style, but it is hard to add new methods to the interface because all classes are affected. The dilemma is called the expression problem that concerns the extenibility and modularity of adding new representations and new behaviors to a data abstraction.
+
+For an OO language like Java, the Visitor pattern makes it easy to add new operations to classes without changing the classes. The implementation is to add an `abstract void accept(Visitor visitor)` method to the base class. Each subclass implement this method using a specific method defined in the `Visitor` interface, like `visitor.visitSubClass(this)`. The `Visitor` interface defines such a specific method for each subclass. Therefore classes that implement all methods of `Visitor` can be passed to any subclass to perform an appropirate operation. Adding a new operation is adding a new class implementing the `Visitor` interface. However, adding a new type is till an issue because you need to change all classes implementing the `Visitor` interface. It is just a solution to make it easy to add behaviors to a set of classes. The classes are pretty fixed because the language syntax is fixed -- however, the operations are more flexible than the class hierarchy.
