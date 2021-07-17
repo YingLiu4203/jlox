@@ -30,6 +30,8 @@ primary -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" | IDE
 
 Then we add a statement node for a variable declaration: `"Var: Token name, Expr iniitializer"` and an expression node for accessing a variable: `"Varaible: Token name"`.
 
-## 3 Environments
+## 3 Environments and Assignments
 
 The data structure that stores the variable bindings is called an **environment**.
+
+Like most C-derived language, assignment is an expression and not a statement. It is the lowest precedence expression form. The `Expr.Assign` node has a `Token` in the left-hand side, not an `Expr`. Assignment is right-assoicative therefore it calls itself recursively.
