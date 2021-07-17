@@ -35,3 +35,11 @@ Then we add a statement node for a variable declaration: `"Var: Token name, Expr
 The data structure that stores the variable bindings is called an **environment**.
 
 Like most C-derived language, assignment is an expression and not a statement. It is the lowest precedence expression form. The `Expr.Assign` node has a `Token` in the left-hand side, not an `Expr`. Assignment is right-assoicative therefore it calls itself recursively.
+
+## 4 Scope
+
+A **scope** defines a region where a name maps to a certain entity. **Lexical scope** (or called **static scope**) is a style of scoping where the text of the program itself shows where a scope begins and ends. In **dynamic scope**, a variable's value is determined in execution. In Lox, a **block scope** is marked by a curly-braced block.
+
+When a local variable has the same name as an enclosing variable, it **shawdows** the outer one.
+
+We implement scopes by chaining enviornments together. each environment has a reference to the enclosing one.
