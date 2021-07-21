@@ -15,6 +15,15 @@ class Environment {
     this.enclosing = enclosing;
   }
 
+  private Environment(Environment enclosing, Map<String, Object> values) {
+    this.enclosing = enclosing;
+    this.values.putAll(values);
+  }
+
+  public Environment clone() {
+    return new Environment(enclosing, values);
+  }
+
   Object get(Token name) {
     if (values.containsKey(name.lexeme)) {
       return values.get(name.lexeme);

@@ -7,7 +7,7 @@ class LoxFunction implements LoxCallable {
   private final Environment closure;
 
   LoxFunction(Stmt.Function declaration, Environment closure) {
-    this.closure = closure;
+    this.closure = closure.clone();
     this.declaration = declaration;
   }
 
