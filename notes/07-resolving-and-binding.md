@@ -22,8 +22,19 @@ To “resolve” a variable usage, we only need to calculate how many “hops”
 
 After the parser produces the syntax tree, but before the interpreter starts executing it, we’ll do a single walk over the tree to resolve all of the variables it contains. Additional passes between parsing and execution are common. If Lox had static types, we could slide a type checker in there. Optimizations are often implemented in separate passes like this too. Basically, any work that doesn’t rely on state that’s only available at runtime can be done in this way.
 
-Static analysis has two features:
+## Resolver
+
+The variable resolution pass works like a sort of mini-interpreter. It walks the tree, visiting each node, but a static analysis is different from a dynamic execution:
 
 - There are no side effects. When the static analysis visits a print statement, it doesn’t actually print anything. Calls to native functions or other operations that reach out to the outside world are stubbed out and have no effect.
-
 - There is no control flow. Loops are visited only once. Both branches are visited in if statements. Logic operators are not short-circuited.
+
+The resolver needs to visit every node in the syntax tree, it implements the visitor abstraction. Only a few kinds of nodes are interesting when it comes to resolving variables:
+
+- A block statement introduces a new scope for the statements it contains.
+- A function declaration introduces a new scope for its body and binds its parameters in that scope.
+- A variable declaration adds a new variable to the current scope.
+- Variable and assignment expressions need to have their variables resolved.
+- The rest of the nodes don’t do anything special, but we still need to implement visit methods for them that traverse into their subtrees. Even though a + expression doesn’t itself have any variables to resolve, either of its operands might.
+
+Each time the resolver visits a variable, it tells the interpreter how many scopes there are between the current scope and the scope where the variable is defined. At runtime, this corresponds exactly to the number of environments between the current one and the enclosing one where the interpreter can find the variable’s value.
