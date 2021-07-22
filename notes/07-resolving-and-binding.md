@@ -35,6 +35,6 @@ The resolver needs to visit every node in the syntax tree, it implements the vis
 - A function declaration introduces a new scope for its body and binds its parameters in that scope.
 - A variable declaration adds a new variable to the current scope.
 - Variable and assignment expressions need to have their variables resolved.
-- The rest of the nodes don’t do anything special, but we still need to implement visit methods for them that traverse into their subtrees. Even though a + expression doesn’t itself have any variables to resolve, either of its operands might.
+- The rest of the nodes don’t do anything special, but we still need to implement visit methods for them that traverse into their subtrees. Even though a `+` expression doesn’t itself have any variables to resolve, either of its operands might.
 
 Each time the resolver visits a variable, it tells the interpreter how many scopes there are between the current scope and the scope where the variable is defined. At runtime, this corresponds exactly to the number of environments between the current one and the enclosing one where the interpreter can find the variable’s value.
