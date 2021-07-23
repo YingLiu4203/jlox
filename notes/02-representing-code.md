@@ -22,7 +22,7 @@ You may have multiple rules with the same name and you can pick any of the rules
 
 ## 2 A Grammar for Lox Expressions
 
-```text
+```lisp
 expression -> literal | unary | binary | grouping ;
 literal -> NUMBER | STRING | "true" | "false" | "nil" ;
 grouping -> "(" expression ")" ;

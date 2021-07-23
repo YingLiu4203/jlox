@@ -6,7 +6,7 @@ Statements don't evaluate to a value. They do some side effects that change the 
 
 A program is a list of statements. As start, we have the following rules:
 
-```text
+```lisp
 program -> statement* EOF ;
 statement -> exprStmt | printStmt ;
 exprStmt -> expression ";" ;
@@ -19,7 +19,7 @@ A **variable declaration** statement creates a new binding that assicates a name
 
 There are two levels of "precedence" for statemens. Inside a block or at the top leve, any kind of statement is allowed. Others such as the cluases in control flow statements, only the "higher" precedence statements are allowed. The variable declaration statement is not allowed in control flow clauses. To accomodate the distinction, we define the following rules:
 
-```text
+```lisp
 program -> declaration* EOF ;
 declaration -> varDecl | statement ;
 varDecl -> "var" IDENTIFIER ( "=" expression )? ";" ;

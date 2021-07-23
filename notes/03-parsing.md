@@ -8,7 +8,7 @@ The rule of `factor -> factor ( "/" | "*" ) unary | unary ;` recurses to martch 
 
 The complete expression grammar is as the following:
 
-```text
+```lisp
 expression -> equality ;
 equality -> comparison ( ( "!=" | "==") comparison )* ;
 comparison -> term ( ( ">" | ">=" | "<" | "<=" ) * term )* ;

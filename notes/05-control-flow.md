@@ -9,7 +9,7 @@ There are two kinds of control flows:
 
 ## 1 Conditional Execution
 
-```text
+```lisp
 statement      → exprStmt
                | ifStmt
                | printStmt
@@ -25,7 +25,7 @@ To avoid the **dangling else** problem, the `else` is bound to the nearest `if` 
 
 `and` and `or` are special because they **short-circuit**. They are low in the precedence table. They are between assignment and equality. `or` is lower than `and`.
 
-```text
+```lisp
 assignment     → IDENTIFIER "=" assignment
                | logic_or ;
 logic_or       → logic_and ( "or" logic_and )* ;

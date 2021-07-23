@@ -4,7 +4,7 @@
 
 A call can be thought as a postfix operator that starts with `(`. The expression can be function name or an experssion that evaluates to a funciton. This "operator" has higher precedence than any other operator, even the unary ones.
 
-```text
+```lisp
 unary          → ( "!" | "-" ) unary | call ;
 call           → primary ( "(" arguments? ")" )*
 arguments      → expression ( "," expression )* ;
@@ -24,7 +24,7 @@ The `clock` native function returns the number of seconds that have passed since
 
 A named function declaration performs two actions: creating a new function object, and binding a new variable to it. We use two rules to define function declaration rules because the `function` rule can be used to define class methods.
 
-```text
+```lisp
 declaration    → funDecl | varDecl | statement ;
 funDecl        → "fun" function ;
 function       → IDENTIFIER "(" parameters? ")" block ;
