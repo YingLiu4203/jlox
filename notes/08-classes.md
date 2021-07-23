@@ -6,6 +6,12 @@ There are three broad paths to object-oriented programming: **classes**, **proto
 
 In Lox, a class declaration is the class keyword, followed by the class’s name, then a curly-braced body. Inside that body is a list of method declarations. Unlike function declarations, methods don’t have a leading `fun` keyword. Each method is a name, parameter list, and body. Like most dynamically typed languages, fields are not explicitly listed in the class declaration. Instances are loose bags of data and you can freely add fields to them as you see fit using normal imperative code.
 
+In Lox, we use two new runtime entities, `LoxClass` and `LoxInstance`. The former is where behavior for objects lives, and the latter is for state.
+
+We could define methods right on a single object, inside `LoxInstance`. We could let a `LoxInstance` object delegates directly to another `LoxInstance` object to reuse its fields and methods, sort of like inheritance. Objects used as delegates represent “canonical” or “prototypical” objects that others refine. This paramdigm is called "prototype".
+
+Prototypes are simpler than classes—less code for the language implementer to write, and fewer concepts for the user to learn and understand. But the tradeoffs are **breadth**, **ease** and **simplicity**. It depends on how users use the language.
+
 ## 2 Implementation
 
 Like most dynamically typed languages, fields are not explicitly listed in the class declaration. Instances are loose bags of data and you can freely add fields to them as you see fit using normal imperative code.
