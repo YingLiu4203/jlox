@@ -50,7 +50,7 @@ public class Lox {
     List<Token> tokens = scanner.scanTokens();
 
     Parser parser = new Parser(tokens);
-     List<Stmt> statements = parser.parse();
+    List<Stmt> statements = parser.parse();
 
     // Stop if there was a syntax error.
     if (hadError) return;
@@ -64,12 +64,14 @@ public class Lox {
     interpreter.interpret(statements);
 
   }
+  
   static void error(int line, String message) {
     report(line, "", message);
   }
 
   private static void report(int line, String where, String message) {
     System.err.println("[line " + line + "] Error" + where + ": " + message);
+    hadError = true;
   }
 
   static void error(Token token, String message) {
