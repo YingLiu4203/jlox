@@ -16,3 +16,21 @@ The first steps return compiling errors and the last step returns runtime errors
 - `64`: wrong command line arguments.
 - `65`: incorrect input data (compiling error)
 - `70`: an internal software error (runtime error)
+
+## 2 Grammars and Parser
+
+The scanner uses a regular language grammar that can be implemented as a finite state automaton.
+
+The parser uses a context-free language grammar that can be implemented as a pushdown automaton because it has recursive rules. The grammar is carefully written to avoid ambiguity and enable levels of precedenceallow and a top-down parser using recursive descent implementation.
+
+It uses meta-programming to create two class trees representing the expressions and statements. The visitor pattern is used to process the trees.
+
+The parser creates a list of statements using the tokens from the scanner.
+
+## 3 Interpreter
+
+Using the visitor pattern, the interpreter `execute` each statement and `evaluate` each expression. It creates environment to enable scoped variable binding.
+
+## 4 Semantic Analysis
+
+A resovler is used to walk the tree, visisting each node and conduct semantic analysis. It can find grammar errors and build meta-data used by the interpreter.
